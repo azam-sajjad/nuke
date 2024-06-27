@@ -52,11 +52,30 @@ accounts:
       - type: regex
         value: ".*"
       SQSQueue: [] # delete all SQS
-      EC2VPC:
-      - property: IsDefault
-        value: "true"
       CloudFormationStack:
       - type: regex
         value: "^StackSet-scaleops-admin-access-stackset.*"
       - type: regex
         value: "^StackSet-AWS-NUKE.*"
+      EC2VPC:
+      - property: IsDefault
+        value: "true"
+      EC2Subnet:
+      - property: DefaultVPC
+        value: "true"
+      EC2RouteTable:
+      - property: DefaultVPC
+        value: "true"
+      EC2DHCPOption:
+      - property: DefaultVPC
+        value: "true"
+      EC2InternetGateway:
+      - property: DefaultVPC
+        value: "true"
+      EC2InternetGatewayAttachment:
+      - property: DefaultVPC
+        value: "true"
+      EC2DefaultSecurityGroupRule:
+      - type: regex
+        value: ".*"
+
