@@ -52,6 +52,9 @@ accounts:
       - type: regex
         value: ".*"
       SQSQueue: [] # delete all SQS
+      EC2VPC:
+      - property: IsDefault
+        value: "true"
       CloudFormationStack:
       - type: regex
         value: "^StackSet-scaleops-admin-access-stackset.*"
