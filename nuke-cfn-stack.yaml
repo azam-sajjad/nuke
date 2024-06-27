@@ -344,7 +344,7 @@ Resources:
                   if [ "$CODEBUILD_BUILD_SUCCEEDING" = "0" ]; then 
                     echo " Couldn't process Nuke Cleanser - Exiting " >> fail_email_template.txt
                     cat error_log.txt >> fail_email_template.txt
-                    aws sns publish --topic-arn $Publish_TopicArn --message file://fail_email_template.txt --subject "Nuke Account Cleanser Failed in account $account_id and region $NukeTargetRegion"
+                    aws sns publish --topic-arn $Publish_TopicArn --message file://fail_email_template.txt --subject "Nuke Failed in $account_id $NukeTargetRegion"
                     exit 1;
                   fi
                 - sleep 120
@@ -369,7 +369,7 @@ Resources:
                     echo "The file log_output.txt does not exist."
                   fi
                 - echo "Publishing Log Ouput to SNS:"
-                - sub="Nuke Account Cleanser Succeeded in account "$account_id" and region "$NukeTargetRegion""
+                - sub=""$account_id"-"$NukeTargetRegion" - Nuke Success"
                 - |
                   {
                           echo "  Account Cleansing Process Completed;"
