@@ -37,10 +37,6 @@ Parameters:
     Type: String
     Default: scaleops
     Description: The Owner of the account to be used for tagging purpose
-  NukeS3Bucket:
-    Type: String
-    Description: Nuke S3 Bucket Name
-    Default: nuke-config
 Resources:
   NukeAccountCleanserPolicy:
     Type: AWS::IAM::ManagedPolicy
@@ -200,19 +196,6 @@ Resources:
                 Action: organizations:ListAccountsForParent
                 Resource: "*"
         -
-          PolicyName: S3BucketReadOnly 
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              -
-                Effect: Allow
-                Action:
-                  - s3:Get*
-                  - s3:List*
-                Resource:
-                  - !Sub arn:aws:s3:::${AWS::AccountId}-${AWS::Region}-${NukeS3Bucket}
-                  - !Sub arn:aws:s3:::${AWS::AccountId}-${AWS::Region}-${NukeS3Bucket}/*
-        -
           PolicyName: SNSPublishPolicy 
           PolicyDocument:
             Version: 2012-10-17
@@ -255,9 +238,6 @@ Resources:
         - Name: Publish_TopicArn
           Type: PLAINTEXT
           Value: !Ref NukeEmailTopic
-        - Name: NukeS3Bucket
-          Type: PLAINTEXT
-          Value: !Sub ${AWS::AccountId}-${AWS::Region}-${NukeS3Bucket}
         - Name: NukeAssumeRoleArn
           Type: PLAINTEXT
           Value: !GetAtt NukeAccountCleanserRole.Arn
