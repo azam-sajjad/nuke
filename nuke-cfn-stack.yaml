@@ -29,10 +29,10 @@ Parameters:
      updated with that new version.
     Type: String
     Default: 2.21.2
-  NukeTopicName:
-    Description: The SNS Topic name to publish the nuke output logs email
+  NukeEmailTopic:
+    Description: The SNS Topic arn to publish the nuke output logs email
     Type: String
-    Default: nuke-cleanser-notify-topic
+    Default: arn:aws:sns:us-east-1:059516066038:central-managed-NukeNotifications
   Owner:
     Type: String
     Default: scaleops
@@ -482,21 +482,21 @@ Resources:
               }
             }
 
-  NukeEmailTopic:
-    Type: AWS::SNS::Topic
-    Properties:
-      DisplayName: NukeTopic
-      FifoTopic: false
-      KmsMasterKeyId: "alias/aws/sns"
-      Subscription:
-       - Endpoint: "azam.sajjad@eurustechnologies.com" # Provide your valid email address for receiving notifications
-         Protocol: "email"
-      TopicName: !Ref NukeTopicName
-      Tags:
-        - Key: DoNotNuke
-          Value: 'True'
-        - Key: owner
-          Value: !Ref Owner
+  # NukeEmailTopic:
+  #   Type: AWS::SNS::Topic
+  #   Properties:
+  #     DisplayName: NukeTopic
+  #     FifoTopic: false
+  #     KmsMasterKeyId: "alias/aws/sns"
+  #     Subscription:
+  #      - Endpoint: "azam.sajjad@eurustechnologies.com" # Provide your valid email address for receiving notifications
+  #        Protocol: "email"
+  #     TopicName: !Ref NukeTopicName
+  #     Tags:
+  #       - Key: DoNotNuke
+  #         Value: 'True'
+  #       - Key: owner
+  #         Value: !Ref Owner
 
   ## Role for sample step function
   NukeStepFunctionRole:
@@ -694,7 +694,7 @@ Resources:
           Value: !Ref Owner
 
 
-Outputs:
-  NukeTopicArn:
-    Description: Arn of SNS Topic used for notifying nuke results in email
-    Value: !Ref NukeEmailTopic
+# Outputs:
+#   NukeTopicArn:
+#     Description: Arn of SNS Topic used for notifying nuke results in email
+#     Value: !Ref NukeEmailTopic
