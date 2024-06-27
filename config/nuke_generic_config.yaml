@@ -7,6 +7,7 @@ account-blocklist:
   - 059516066038 # Control
   - 001641974168 # Audit
   - 863906266668 # Log
+  - 730335579029 # demo
 
 # optional: restrict nuking to these resources
 resource-types:
