@@ -51,3 +51,6 @@ accounts:
       - type: regex
         value: ".*"
       SQSQueue: [] # delete all SQS
+      CloudFormationStackSet:
+      - type: regex
+        value: "^StackSet-scaleops-admin-access-stackset.*"
